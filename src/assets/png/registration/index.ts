@@ -1,0 +1,1 @@
+export { RegistrationPng } from './RegistrationPng';

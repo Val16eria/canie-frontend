@@ -1,3 +1,9 @@
 import React, { FC } from 'react';
 
-export const App: FC = () => <div>App</div>;
+import { Registration } from '../features/auth';
+
+export const App: FC = () => (
+    <div>
+        <Registration />
+    </div>
+);
