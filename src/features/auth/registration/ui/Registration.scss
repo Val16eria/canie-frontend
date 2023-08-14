@@ -1,20 +1,17 @@
-.registration__container {
-    gap: 50px;
-}
-
 .registration__inputs {
     gap: 30px;
 }
 
 .registration__inputs_fullname {
-    gap: 30px;
+    justify-content: space-between;
 }
 
 .registration__choice {
-    gap: 50px;
+    justify-content: space-between;
 }
 
 .registration__checkbox {
     gap: 10px;
+    justify-content: center;
     align-items: baseline;
 }

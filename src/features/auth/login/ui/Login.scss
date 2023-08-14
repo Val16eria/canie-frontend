@@ -1,0 +1,28 @@
+.login__inputs {
+    gap: 30px;
+}
+
+.login__options {
+    justify-content: space-between;
+}
+
+.login__options_checkbox {
+    gap: 10px;
+    align-items: baseline;
+}
+
+.login__links {
+    gap: 13px;
+    align-items: center;
+}
+
+.login__links_link {
+    gap: 20px;
+}
+
+.login__link {
+    max-width: 34px;
+    max-height: 34px;
+    width: 100%;
+    height: 100%;
+}

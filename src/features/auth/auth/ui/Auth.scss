@@ -5,6 +5,7 @@
 .auth__content {
     gap: 150px;
     padding: 30px 90px;
+    width: 50%;
 }
 
 .auth__content_logo {
@@ -16,6 +17,10 @@
 
 .auth__content_form {
     gap: 35px;
+}
+
+.auth__form_children {
+    gap: 50px;
 }
 
 .auth__form_submit {

@@ -1,9 +1,5 @@
 import React, { FC } from 'react';
 
-import { Registration } from '../features/auth';
+import { Router } from '../routing';
 
-export const App: FC = () => (
-    <div>
-        <Registration />
-    </div>
-);
+export const App: FC = () => <Router />;
