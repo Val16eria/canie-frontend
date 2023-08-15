@@ -7,7 +7,7 @@ export const schema = yup.object({
         .required('Поле обязательно для заполнения')
         .min(8, 'Пароль не должен быть менее 8 симоволов')
         .max(20, 'Пароль не может быть более 20 символов'),
-    remeber_me: yup.boolean().required(),
+    remember_me: yup.boolean().required(),
 });
 
 export type FormData = yup.InferType<typeof schema>;

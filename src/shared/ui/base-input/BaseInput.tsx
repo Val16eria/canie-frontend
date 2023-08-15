@@ -1,6 +1,7 @@
 import React, { InputHTMLAttributes, forwardRef } from 'react';
 
 import './BaseInput.scss';
+import { ErrorMessage } from '../error-message';
 
 interface IBaseInput extends InputHTMLAttributes<HTMLInputElement> {
     error?: string;
@@ -15,9 +16,7 @@ export const BaseInput = forwardRef<HTMLInputElement, IBaseInput>(
                     {...props}
                     ref={ref}
                 />
-                <p className='text-regular text-extra-small-size error-style'>
-                    {error}
-                </p>
+                <ErrorMessage text={error} />
             </div>
         );
     },

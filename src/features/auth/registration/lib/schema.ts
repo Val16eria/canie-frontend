@@ -13,6 +13,10 @@ export const schema = yup.object({
         .mixed()
         .oneOf(['photograph', 'model'])
         .required('Необходимо выбрать роль'),
+    contract: yup
+        .boolean()
+        .oneOf([true], 'Обязательное действие')
+        .required('Обязательное действие'),
 });
 
 export type FormData = yup.InferType<typeof schema>;

@@ -1,11 +1,14 @@
 import React, { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { schema, FormData } from '../lib';
 
+import { authSignUp } from '../../../../shared/api';
+
 import { Auth } from '../../auth';
-import { BaseButton, BaseInput } from '../../../../shared/ui';
+import { BaseButton, BaseInput, ErrorMessage } from '../../../../shared/ui';
 import { RegistrationPng } from '../../../../assets/png';
 
 import './Registration.scss';
@@ -31,6 +34,7 @@ export const Registration: FC = () => {
     });
 
     const [isActive, setActive] = useState<IRole>(initialState);
+    const navigate = useNavigate();
 
     const handleChange = (ownName: keyof IRole, withoutName: keyof IRole) => {
         setActive((prevState) => ({
@@ -41,7 +45,20 @@ export const Registration: FC = () => {
     };
 
     const onSubmit = async (data: FormData) => {
-        console.log('login data ->', data);
+        try {
+            await authSignUp({
+                first_name: data.first_name,
+                last_name: data.last_name,
+                email: data.email,
+                pws: data.pws,
+                role: data.role as string,
+            })
+                .then(() => navigate('/'))
+                .catch((err) => console.log(err));
+            console.log('login data ->', data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
@@ -125,16 +142,15 @@ export const Registration: FC = () => {
                         </div>
                     )}
                 />
-                <p className='text-regular text-extra-small-size error-style'>
-                    {errors.role?.message ?? ''}
-                </p>
+                <ErrorMessage text={errors.role?.message ?? ''} />
             </div>
             <div className='flexable-row registration__checkbox'>
-                <input type='checkbox' />
+                <input type='checkbox' {...register('contract')} />
                 <label className='text-regular text-extra-small-size'>
                     Регистрируясь, вы принимаете условия Пользовательского
                     соглашения
                 </label>
+                <ErrorMessage text={errors.contract?.message ?? ''} />
             </div>
         </Auth>
     );

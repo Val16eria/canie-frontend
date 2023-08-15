@@ -1,8 +1,11 @@
 import React, { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { schema, FormData } from '../lib';
+
+import { authSignIn } from '../../../../shared/api';
 
 import { Auth } from '../../auth';
 import { BaseInput } from '../../../../shared/ui';
@@ -22,8 +25,16 @@ export const Login: FC = () => {
         resolver: yupResolver(schema),
     });
 
+    const navigate = useNavigate();
+
     const onSubmit = async (data: FormData) => {
-        console.log('login data ->', data);
+        try {
+            await authSignIn(data)
+                .then(() => navigate('/'))
+                .catch((err) => console.log(err));
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
@@ -51,8 +62,8 @@ export const Login: FC = () => {
             </div>
             <div className='flexable-row login__options'>
                 <div className='flexable-row login__options_checkbox'>
-                    <input type='checkbox' {...register('remeber_me')} />
-                    <p>{errors.remeber_me?.message ?? ''}</p>
+                    <input type='checkbox' {...register('remember_me')} />
+                    <p>{errors.remember_me?.message ?? ''}</p>
                     <label className='text-regular text-extra-small-size'>
                         Запомнить меня
                     </label>
