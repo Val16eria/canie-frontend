@@ -1,17 +1,20 @@
 import React, { FC } from 'react';
 
-import './BaseButton.scss';
-
 interface IBaseButton {
-    btn_text: string;
+    btnText: string;
     type?: 'button';
+    isPurple?: boolean;
 }
 
-export const BaseButton: FC<IBaseButton> = ({ btn_text, type }) => (
-    <button
-        className='button-white-style text-medium text-small-size base-button__container'
-        type={type}
-    >
-        {btn_text}
-    </button>
-);
+export const BaseButton: FC<IBaseButton> = ({ btnText, type, isPurple }) => {
+    const setStyle = isPurple ? 'button-purple-style' : 'button-white-style';
+
+    return (
+        <button
+            className={`${setStyle} text-medium text-small-size button-style`}
+            type={type}
+        >
+            {btnText}
+        </button>
+    );
+};

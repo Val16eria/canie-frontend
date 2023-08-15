@@ -29,9 +29,9 @@ export const Login: FC = () => {
     return (
         <Auth
             title='Вход'
-            btn_text='ВОЙТИ'
-            link_text='Нет аккаунта? Зарегистрироваться'
-            link_path='/auth/signup'
+            btnText='ВОЙТИ'
+            linkText='Нет аккаунта? Зарегистрироваться'
+            linkPath='/auth/signup'
             Image={LoginPng}
             onSubmit={handleSubmit(onSubmit)}
         >

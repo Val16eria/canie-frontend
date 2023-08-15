@@ -8,17 +8,17 @@ import './Auth.scss';
 
 interface IAuth extends HTMLAttributes<HTMLFormElement> {
     title: string;
-    btn_text: string;
-    link_text: string;
-    link_path: string;
+    btnText: string;
+    linkText: string;
+    linkPath: string;
     Image: React.ElementType;
 }
 
 export const Auth: FC<PropsWithChildren<IAuth>> = ({
     title,
-    btn_text,
-    link_text,
-    link_path,
+    btnText,
+    linkText,
+    linkPath,
     Image,
     ...rest
 }) => {
@@ -32,12 +32,12 @@ export const Auth: FC<PropsWithChildren<IAuth>> = ({
                         {rest.children}
                     </div>
                     <div className='flexable-column auth__form_submit'>
-                        <BaseButton btn_text={btn_text} />
+                        <BaseButton btnText={btnText} />
                         <NavLink
                             className='text-regular text-extra-small-size'
-                            to={link_path}
+                            to={linkPath}
                         >
-                            {link_text}
+                            {linkText}
                         </NavLink>
                     </div>
                 </form>

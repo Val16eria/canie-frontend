@@ -1,3 +1,3 @@
-export * from './auth';
-export * from './registration';
-export * from './login';
+export { Auth } from './auth';
+export { Registration } from './registration';
+export { Login } from './login';
