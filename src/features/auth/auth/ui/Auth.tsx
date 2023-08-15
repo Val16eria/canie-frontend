@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react';
+import React, { FC, HTMLAttributes, PropsWithChildren } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { BaseButton } from '../../../../shared/ui';
@@ -6,13 +6,12 @@ import { BaseButton } from '../../../../shared/ui';
 import Logo from '../../../../assets/icons/logo.svg';
 import './Auth.scss';
 
-interface IAuth {
+interface IAuth extends HTMLAttributes<HTMLFormElement> {
     title: string;
     btn_text: string;
     link_text: string;
     link_path: string;
     Image: React.ElementType;
-    children: React.ReactNode;
 }
 
 export const Auth: FC<PropsWithChildren<IAuth>> = ({
@@ -21,16 +20,16 @@ export const Auth: FC<PropsWithChildren<IAuth>> = ({
     link_text,
     link_path,
     Image,
-    children,
+    ...rest
 }) => {
     return (
         <div className='flexable-row auth__container'>
             <div className='flexable-column auth__content'>
                 <img className='auth__content_logo' src={Logo} alt='logo' />
-                <form className='flexable-column auth__content_form'>
+                <form className='flexable-column auth__content_form' {...rest}>
                     <p className='text-medium text-middle-size'>{title}</p>
                     <div className='flexable-column auth__form_children'>
-                        {children}
+                        {rest.children}
                     </div>
                     <div className='flexable-column auth__form_submit'>
                         <BaseButton btn_text={btn_text} />

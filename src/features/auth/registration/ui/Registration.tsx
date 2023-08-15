@@ -17,11 +17,19 @@ export const Registration: FC = () => {
         >
             <div className='flexable-column registration__inputs'>
                 <div className='flexable-row registration__inputs_fullname'>
-                    <BaseInput type='text' placeholder='Имя' />
-                    <BaseInput type='text' placeholder='Фамилия' />
+                    <BaseInput type='text' placeholder='Имя' error={''} />
+                    <BaseInput type='text' placeholder='Фамилия' error={''} />
                 </div>
-                <BaseInput type='email' placeholder='Электронная почта' />
-                <BaseInput type='password' placeholder='Придумайте пароль' />
+                <BaseInput
+                    type='email'
+                    placeholder='Электронная почта'
+                    error={''}
+                />
+                <BaseInput
+                    type='password'
+                    placeholder='Придумайте пароль'
+                    error={''}
+                />
             </div>
             <div className='flexable-row registration__choice'>
                 <BaseButton btn_text='Я - фотограф' type='button' />
