@@ -11,7 +11,7 @@ interface IAuth extends HTMLAttributes<HTMLFormElement> {
     btnText: string;
     linkText: string;
     linkPath: string;
-    Image: React.ElementType;
+    imageSource: any;
 }
 
 export const Auth: FC<PropsWithChildren<IAuth>> = ({
@@ -19,7 +19,7 @@ export const Auth: FC<PropsWithChildren<IAuth>> = ({
     btnText,
     linkText,
     linkPath,
-    Image,
+    imageSource,
     ...rest
 }) => {
     return (
@@ -42,7 +42,11 @@ export const Auth: FC<PropsWithChildren<IAuth>> = ({
                     </div>
                 </form>
             </div>
-            <Image />
+            <img
+                className='image-large'
+                src={imageSource}
+                alt='registartion photo'
+            />
         </div>
     );
 };

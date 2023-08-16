@@ -1,1 +1,0 @@
-export { LoginPng } from './LoginPng';

@@ -10,7 +10,7 @@ import { authSignIn } from '../../../../shared/api';
 import { Auth } from '../../auth';
 import { BaseInput } from '../../../../shared/ui';
 
-import { LoginPng } from '../../../../assets/png';
+import LoginPng from '../../../../assets/login-man.png';
 import Twitter from '../../../../assets/icons/social-twitter.svg';
 import Facebook from '../../../../assets/icons/social-facebook.svg';
 import Apple from '../../../../assets/icons/social-apple.svg';
@@ -31,11 +31,14 @@ export const Login: FC = () => {
         try {
             await authSignIn(data)
                 .then(() => navigate('/'))
-                .catch((err) => console.log(err));
+                .catch((err) => console.log(err.response.data.reason));
         } catch (err) {
             console.log(err);
         }
     };
+
+    console.log('errors.email?.message ->', errors.email?.message);
+    console.log('errors.pws?.message ->', errors.pws?.message);
 
     return (
         <Auth
@@ -43,7 +46,7 @@ export const Login: FC = () => {
             btnText='ВОЙТИ'
             linkText='Нет аккаунта? Зарегистрироваться'
             linkPath='/auth/signup'
-            Image={LoginPng}
+            imageSource={LoginPng}
             onSubmit={handleSubmit(onSubmit)}
         >
             <div className='flexable-column login__inputs'>
@@ -74,13 +77,23 @@ export const Login: FC = () => {
             </div>
             <div className='flexable-column login__links'>
                 <div className='flexable-row login__links_link'>
-                    <img className='login__link' src={Twitter} alt='twitter' />
-                    <img
-                        className='login__link'
-                        src={Facebook}
-                        alt='facebook'
-                    />
-                    <img className='login__link' src={Apple} alt='apple' />
+                    <a>
+                        <img
+                            className='login__link'
+                            src={Twitter}
+                            alt='twitter'
+                        />
+                    </a>
+                    <a>
+                        <img
+                            className='login__link'
+                            src={Facebook}
+                            alt='facebook'
+                        />
+                    </a>
+                    <a>
+                        <img className='login__link' src={Apple} alt='apple' />
+                    </a>
                 </div>
                 <p className='text-regular text-extra-small-size'>
                     Или выполните вход через соцсети

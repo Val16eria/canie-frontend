@@ -9,8 +9,8 @@ import { authSignUp } from '../../../../shared/api';
 
 import { Auth } from '../../auth';
 import { BaseButton, BaseInput, ErrorMessage } from '../../../../shared/ui';
-import { RegistrationPng } from '../../../../assets/png';
 
+import RegistrationPng from '../../../../assets/registration-man.png';
 import './Registration.scss';
 
 interface IRole {
@@ -54,10 +54,9 @@ export const Registration: FC = () => {
                 role: data.role as string,
             })
                 .then(() => navigate('/'))
-                .catch((err) => console.log(err));
-            console.log('login data ->', data);
+                .catch((err) => console.log(err.response.data.reason));
         } catch (err) {
-            console.log(err);
+            console.log('222', err);
         }
     };
 
@@ -67,7 +66,7 @@ export const Registration: FC = () => {
             btnText='ЗАРЕГИСТРИРОВАТЬСЯ'
             linkText='Есть аккаунт? Авторизоваться'
             linkPath='/auth/signin'
-            Image={RegistrationPng}
+            imageSource={RegistrationPng}
             onSubmit={handleSubmit(onSubmit)}
         >
             <div className='flexable-column registration__inputs'>
