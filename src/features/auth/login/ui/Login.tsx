@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { FC, useState } from 'react';
+// import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { schema, FormData } from '../lib';
 
-import { authSignIn } from '../../../../shared/api';
+import { IUser, authSignIn } from '../../../../shared/api';
 
 import { Auth } from '../../auth';
 import { BaseInput } from '../../../../shared/ui';
@@ -25,20 +25,19 @@ export const Login: FC = () => {
         resolver: yupResolver(schema),
     });
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
+    const [user, setUser] = useState<IUser>({} as IUser);
 
     const onSubmit = async (data: FormData) => {
         try {
-            await authSignIn(data)
-                .then(() => navigate('/'))
-                .catch((err) => console.log(err.response.data.reason));
+            const response = await authSignIn(data);
+            // .then(() => navigate('/'))
+            // .catch((err) => console.log(err.response.data.reason));
+            setUser(response);
         } catch (err) {
             console.log(err);
         }
     };
-
-    console.log('errors.email?.message ->', errors.email?.message);
-    console.log('errors.pws?.message ->', errors.pws?.message);
 
     return (
         <Auth
@@ -99,6 +98,7 @@ export const Login: FC = () => {
                     Или выполните вход через соцсети
                 </p>
             </div>
+            <p>{user.user?.first_name}</p>
         </Auth>
     );
 };

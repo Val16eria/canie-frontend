@@ -26,7 +26,11 @@ export const Auth: FC<PropsWithChildren<IAuth>> = ({
         <div className='flexable-row auth__container'>
             <div className='flexable-column auth__content'>
                 <img className='auth__content_logo' src={Logo} alt='logo' />
-                <form className='flexable-column auth__content_form' {...rest}>
+                <form
+                    className='flexable-column auth__content_form'
+                    noValidate
+                    {...rest}
+                >
                     <p className='text-medium text-middle-size'>{title}</p>
                     <div className='flexable-column auth__form_children'>
                         {rest.children}

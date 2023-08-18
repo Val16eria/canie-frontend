@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -13,17 +13,7 @@ import { BaseButton, BaseInput, ErrorMessage } from '../../../../shared/ui';
 import RegistrationPng from '../../../../assets/registration-man.png';
 import './Registration.scss';
 
-interface IRole {
-    isPhotograph: boolean;
-    isModel: boolean;
-}
-
 export const Registration: FC = () => {
-    const initialState = {
-        isPhotograph: false,
-        isModel: false,
-    };
-
     const {
         control,
         register,
@@ -33,16 +23,7 @@ export const Registration: FC = () => {
         resolver: yupResolver(schema),
     });
 
-    const [isActive, setActive] = useState<IRole>(initialState);
     const navigate = useNavigate();
-
-    const handleChange = (ownName: keyof IRole, withoutName: keyof IRole) => {
-        setActive((prevState) => ({
-            ...prevState,
-            [ownName]: true,
-            [withoutName]: false,
-        }));
-    };
 
     const onSubmit = async (data: FormData) => {
         try {
@@ -60,6 +41,7 @@ export const Registration: FC = () => {
         }
     };
 
+    // useEffect в депсах дата и добавлять данные в сессию
     return (
         <Auth
             title='Регистрация'
@@ -102,22 +84,19 @@ export const Registration: FC = () => {
                     name='role'
                     control={control}
                     rules={{ required: true }}
-                    render={({ field: { onChange } }) => (
+                    render={({ field: { onChange, value } }) => (
                         <div className='flexable-row registration__choice_inputs'>
                             <div className='registration__inputs_input'>
                                 <BaseButton
                                     type='button'
                                     btnText='Я - фотограф'
-                                    isPurple={isActive.isPhotograph}
+                                    isPurple={value === 'photograph'}
                                 />
                                 <input
                                     className='registration__input'
                                     name='role'
                                     type='radio'
                                     value='photograph'
-                                    onClick={() =>
-                                        handleChange('isPhotograph', 'isModel')
-                                    }
                                     onChange={onChange}
                                 />
                             </div>
@@ -125,16 +104,13 @@ export const Registration: FC = () => {
                                 <BaseButton
                                     type='button'
                                     btnText='Я - модель'
-                                    isPurple={isActive.isModel}
+                                    isPurple={value === 'model'}
                                 />
                                 <input
                                     className='registration__input'
                                     name='role'
                                     type='radio'
                                     value='model'
-                                    onClick={() =>
-                                        handleChange('isModel', 'isPhotograph')
-                                    }
                                     onChange={onChange}
                                 />
                             </div>

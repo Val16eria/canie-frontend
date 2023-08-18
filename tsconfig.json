@@ -9,5 +9,5 @@
     "skipLibCheck": true,                                /* Skip type checking all .d.ts files. */
     "jsx": "react-jsx"
   },
-  "include": ["src/", "index.d.ts"],
+  "include": ["src/", "index.d.ts", "mocks/", "jest.config.js", "test"],
 }
