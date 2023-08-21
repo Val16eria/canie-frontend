@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { createBrowserHistory } from '@remix-run/router';
 
-import { user } from '../../../../shared/api';
+import { user } from '@shared/api';
 import registrationModel from '../model';
 import { Registration } from './Registration';
 

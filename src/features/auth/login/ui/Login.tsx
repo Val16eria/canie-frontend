@@ -6,15 +6,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { schema, FormData } from '../lib';
 
-import sessionModel from '../../../../entities/session/model';
+import sessionModel from '@entities/session/model';
 import loginModel from '../model';
 import { Auth } from '../../auth';
-import { BaseInput } from '../../../../shared/ui';
+import { BaseInput } from '@shared/ui';
 
-import LoginPng from '../../../../assets/login-man.png';
-import Twitter from '../../../../assets/icons/social-twitter.svg';
-import Facebook from '../../../../assets/icons/social-facebook.svg';
-import Apple from '../../../../assets/icons/social-apple.svg';
+import LoginPng from '@assets/login-man.png';
+import Twitter from '@assets/icons/social-twitter.svg';
+import Facebook from '@assets/icons/social-facebook.svg';
+import Apple from '@assets/icons/social-apple.svg';
 import './Login.scss';
 
 export const Login: FC = observer(() => {

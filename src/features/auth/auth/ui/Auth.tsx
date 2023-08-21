@@ -1,9 +1,9 @@
 import React, { FC, HTMLAttributes, PropsWithChildren } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { BaseButton, ErrorMessage, Loader } from '../../../../shared/ui';
+import { BaseButton, ErrorMessage, Loader } from '@shared/ui';
 
-import Logo from '../../../../assets/icons/logo.svg';
+import Logo from '@assets/icons/logo.svg';
 import './Auth.scss';
 
 interface IAuth extends HTMLAttributes<HTMLFormElement> {

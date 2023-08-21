@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { IUser, authLogout } from '../../../shared/api';
+import { IUser, authLogout } from '@shared/api';
 
 class SessionModel {
     public isAuthChecked: boolean = false;
