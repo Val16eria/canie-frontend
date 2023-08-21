@@ -2,7 +2,10 @@ import '@testing-library/jest-dom/extend-expect';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { createBrowserHistory } from '@remix-run/router';
 
+import { user } from '../../../../shared/api';
+import registrationModel from '../model';
 import { Registration } from './Registration';
 
 describe('Registration component', () => {
@@ -13,6 +16,7 @@ describe('Registration component', () => {
             </BrowserRouter>,
         );
 
+        const history = createBrowserHistory();
         const firstNameInput = screen.getByPlaceholderText('Имя');
         const lastNameInput = screen.getByPlaceholderText('Фамилия');
         const emailInput = screen.getByPlaceholderText('Электронная почта');
@@ -49,6 +53,9 @@ describe('Registration component', () => {
         expect(
             screen.queryByText('Пароль не может быть более 20 символов'),
         ).not.toBeInTheDocument();
+
+        expect(registrationModel.data).toEqual(user);
+        expect(history.location.pathname).toBe('/');
     });
 
     describe('first_name is empty', () => {

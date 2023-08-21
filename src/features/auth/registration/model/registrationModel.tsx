@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { IUser, IError, IAuthSignUp, authSignUp } from '@shared/api';
+import { IUser, IError, IAuthSignUp, authSignUp } from '../../../../shared/api';
 
 class RegistrationModel {
     public error: IError | null = null;

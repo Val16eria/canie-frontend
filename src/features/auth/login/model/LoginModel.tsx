@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { IAuthSignIn, IError, IUser, authSignIn } from '@shared/api';
+import { IAuthSignIn, IError, IUser, authSignIn } from '../../../../shared/api';
 
 class LoginModel {
     public error: IError | null = null;

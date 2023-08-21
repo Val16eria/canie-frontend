@@ -6,12 +6,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 
 import { schema, FormData } from '../lib';
 
-import sessionModel from '@entities/session/model';
+import sessionModel from '../../../../entities/session/model';
 import registrationModel from '../model';
 import { Auth } from '../../auth';
-import { BaseButton, BaseInput, ErrorMessage } from '@shared/ui';
+import { BaseButton, BaseInput, ErrorMessage } from '../../../../shared/ui';
 
-import RegistrationPng from '@assets/registration-man.png';
+import RegistrationPng from '../../../../assets/registration-man.png';
 import './Registration.scss';
 
 export const Registration: FC = observer(() => {

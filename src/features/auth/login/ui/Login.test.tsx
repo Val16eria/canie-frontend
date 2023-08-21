@@ -1,8 +1,11 @@
+import '@testing-library/jest-dom/extend-expect';
 import { BrowserRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import '@testing-library/jest-dom/extend-expect';
+import { createBrowserHistory } from '@remix-run/router';
 
+import { user } from '../../../../shared/api';
+import loginModel from '../model';
 import { Login } from './Login';
 
 describe('Login component', () => {
@@ -13,6 +16,7 @@ describe('Login component', () => {
             </BrowserRouter>,
         );
 
+        const history = createBrowserHistory();
         const emailInput = screen.getByPlaceholderText('Электронная почта');
         const pwsInput = screen.getByPlaceholderText('Пароль');
         const button = screen.getByRole('button');
@@ -34,9 +38,8 @@ describe('Login component', () => {
             screen.queryByText('Пароль не может быть более 20 символов'),
         ).not.toBeInTheDocument();
 
-        expect(await screen.findByText('Valeria')).toBeInTheDocument();
-        // проверять маршрут
-        // проверять данные в сторе
+        expect(loginModel.data).toEqual(user);
+        expect(history.location.pathname).toBe('/');
     });
 
     describe('email is empty', () => {
