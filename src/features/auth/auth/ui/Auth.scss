@@ -1,0 +1,38 @@
+.auth__container {
+    justify-content: space-between;
+}
+
+.auth__content {
+    gap: 100px;
+    padding: 30px 90px;
+    width: 50%;
+}
+
+.auth__content_logo {
+    max-width: 107px;
+    max-height: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.auth__content_form {
+    gap: 35px;
+}
+
+.auth__form_children {
+    gap: 50px;
+}
+
+.auth__form_submit {
+    gap: 20px;
+    align-items: center;
+}
+
+.auth__submit {
+    gap: 10px;
+    align-items: center;
+}
+
+.auth__form_error {
+    text-align: center;
+}

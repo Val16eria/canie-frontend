@@ -1,3 +1,5 @@
 import React, { FC } from 'react';
 
-export const App: FC = () => <div>App</div>;
+import { Router } from '@routing/index';
+
+export const App: FC = () => <Router />;

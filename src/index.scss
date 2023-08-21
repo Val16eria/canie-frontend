@@ -1,0 +1,19 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    background-color: #11121B;
+    color: #F2F2F2;
+}
+
+a {
+    cursor: pointer;
+    color: #F2F2F2;
+}
+
+button, input[type=button] {
+    cursor: pointer;
+}

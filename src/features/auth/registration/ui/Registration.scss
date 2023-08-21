@@ -1,0 +1,35 @@
+.registration__inputs {
+    gap: 30px;
+}
+
+.registration__inputs_fullname {
+    justify-content: space-between;
+}
+
+.registration__choice {
+    gap: 10px;
+}
+
+.registration__choice_inputs {
+    justify-content: space-between;
+}
+
+.registration__inputs_input {
+    position: relative;
+}
+
+.registration__input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    // visibility: hidden; // не работает
+    opacity: 0;
+}
+
+.registration__checkbox {
+    gap: 10px;
+    justify-content: center;
+    align-items: baseline;
+}
