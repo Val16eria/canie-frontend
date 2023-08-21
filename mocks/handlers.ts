@@ -1,3 +1,3 @@
-import { mswSignIn } from '../src/shared/api';
+import { mswSignIn, mswSignUp } from '../src/shared/api';
 
-export const handlers = [mswSignIn];
+export const handlers = [mswSignIn, mswSignUp];

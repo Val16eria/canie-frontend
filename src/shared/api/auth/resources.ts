@@ -20,9 +20,10 @@ export const authSignIn = async (dto: IAuthSignIn): Promise<IUser> => {
     return response.data;
 };
 
-export const authLogout = async (): Promise<string> => {
+export const authLogout = async (token: string): Promise<string> => {
     const response = await api.post<string, AxiosResponse<string>>(
         '/auth/logout',
+        token,
     );
     return response.data;
 };

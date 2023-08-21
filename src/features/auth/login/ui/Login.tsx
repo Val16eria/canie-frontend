@@ -1,12 +1,13 @@
-import React, { FC, useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import React, { FC, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { schema, FormData } from '../lib';
 
-import { IUser, authSignIn } from '../../../../shared/api';
-
+import sessionModel from '../../../../entities/session/model/sessionModel';
+import loginModel from '../model/LoginModel';
 import { Auth } from '../../auth';
 import { BaseInput } from '../../../../shared/ui';
 
@@ -16,7 +17,7 @@ import Facebook from '../../../../assets/icons/social-facebook.svg';
 import Apple from '../../../../assets/icons/social-apple.svg';
 import './Login.scss';
 
-export const Login: FC = () => {
+export const Login: FC = observer(() => {
     const {
         register,
         handleSubmit,
@@ -25,19 +26,18 @@ export const Login: FC = () => {
         resolver: yupResolver(schema),
     });
 
-    // const navigate = useNavigate();
-    const [user, setUser] = useState<IUser>({} as IUser);
+    const navigate = useNavigate();
 
-    const onSubmit = async (data: FormData) => {
-        try {
-            const response = await authSignIn(data);
-            // .then(() => navigate('/'))
-            // .catch((err) => console.log(err.response.data.reason));
-            setUser(response);
-        } catch (err) {
-            console.log(err);
-        }
+    const onSubmit = (data: FormData) => {
+        loginModel.setUser(data);
     };
+
+    useEffect(() => {
+        if (loginModel.data) {
+            sessionModel.setUser(loginModel.data);
+            navigate('/');
+        }
+    }, [loginModel.data]);
 
     return (
         <Auth
@@ -45,6 +45,8 @@ export const Login: FC = () => {
             btnText='ВОЙТИ'
             linkText='Нет аккаунта? Зарегистрироваться'
             linkPath='/auth/signup'
+            error={loginModel.error?.reason ?? ''}
+            isLoading={loginModel.loading}
             imageSource={LoginPng}
             onSubmit={handleSubmit(onSubmit)}
         >
@@ -98,7 +100,6 @@ export const Login: FC = () => {
                     Или выполните вход через соцсети
                 </p>
             </div>
-            <p>{user.user?.first_name}</p>
         </Auth>
     );
-};
+});

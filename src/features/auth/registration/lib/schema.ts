@@ -15,10 +15,7 @@ export const schema = yup.object({
         .required('Поле обязательно для заполнения')
         .min(8, 'Пароль не должен быть менее 8 симоволов')
         .max(20, 'Пароль не может быть более 20 символов'),
-    role: yup
-        .mixed()
-        .oneOf(['photograph', 'model'])
-        .required('Необходимо выбрать роль'),
+    role: yup.string().required('Необходимо выбрать роль'),
     contract: yup
         .boolean()
         .oneOf([true], 'Обязательное действие')

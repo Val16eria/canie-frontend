@@ -1,19 +1,20 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { schema, FormData } from '../lib';
 
-import { authSignUp } from '../../../../shared/api';
-
+import sessionModel from '../../../../entities/session/model/sessionModel';
+import registrationModel from '../model/registrationModel';
 import { Auth } from '../../auth';
 import { BaseButton, BaseInput, ErrorMessage } from '../../../../shared/ui';
 
 import RegistrationPng from '../../../../assets/registration-man.png';
 import './Registration.scss';
 
-export const Registration: FC = () => {
+export const Registration: FC = observer(() => {
     const {
         control,
         register,
@@ -25,29 +26,31 @@ export const Registration: FC = () => {
 
     const navigate = useNavigate();
 
-    const onSubmit = async (data: FormData) => {
-        try {
-            await authSignUp({
-                first_name: data.first_name,
-                last_name: data.last_name,
-                email: data.email,
-                pws: data.pws,
-                role: data.role as string,
-            })
-                .then(() => navigate('/'))
-                .catch((err) => console.log(err.response.data.reason));
-        } catch (err) {
-            console.log('222', err);
-        }
+    const onSubmit = (data: FormData) => {
+        registrationModel.createUser({
+            first_name: data.first_name,
+            last_name: data.last_name,
+            email: data.email,
+            pws: data.pws,
+            role: data.role,
+        });
     };
 
-    // useEffect в депсах дата и добавлять данные в сессию
+    useEffect(() => {
+        if (registrationModel.data) {
+            sessionModel.setUser(registrationModel.data);
+            navigate('/');
+        }
+    }, [registrationModel.data]);
+
     return (
         <Auth
             title='Регистрация'
             btnText='ЗАРЕГИСТРИРОВАТЬСЯ'
             linkText='Есть аккаунт? Авторизоваться'
             linkPath='/auth/signin'
+            error={registrationModel.error?.reason ?? ''}
+            isLoading={registrationModel.loading}
             imageSource={RegistrationPng}
             onSubmit={handleSubmit(onSubmit)}
         >
@@ -129,4 +132,4 @@ export const Registration: FC = () => {
             </div>
         </Auth>
     );
-};
+});

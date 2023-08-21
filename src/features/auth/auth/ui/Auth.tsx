@@ -1,7 +1,7 @@
 import React, { FC, HTMLAttributes, PropsWithChildren } from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { BaseButton } from '../../../../shared/ui';
+import { BaseButton, ErrorMessage, Loader } from '../../../../shared/ui';
 
 import Logo from '../../../../assets/icons/logo.svg';
 import './Auth.scss';
@@ -11,6 +11,8 @@ interface IAuth extends HTMLAttributes<HTMLFormElement> {
     btnText: string;
     linkText: string;
     linkPath: string;
+    error?: string;
+    isLoading?: boolean;
     imageSource: any;
 }
 
@@ -19,6 +21,8 @@ export const Auth: FC<PropsWithChildren<IAuth>> = ({
     btnText,
     linkText,
     linkPath,
+    error,
+    isLoading,
     imageSource,
     ...rest
 }) => {
@@ -36,13 +40,19 @@ export const Auth: FC<PropsWithChildren<IAuth>> = ({
                         {rest.children}
                     </div>
                     <div className='flexable-column auth__form_submit'>
-                        <BaseButton btnText={btnText} />
+                        <div className='flexable-row auth__submit'>
+                            <BaseButton btnText={btnText} />
+                            {isLoading && <Loader />}
+                        </div>
                         <NavLink
                             className='text-regular text-extra-small-size'
                             to={linkPath}
                         >
                             {linkText}
                         </NavLink>
+                    </div>
+                    <div className='auth__form_error'>
+                        <ErrorMessage text={error} />
                     </div>
                 </form>
             </div>

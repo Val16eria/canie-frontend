@@ -1,27 +1,33 @@
-export default {};
+import { makeAutoObservable, runInAction } from 'mobx';
+import { IUser, IError, IAuthSignUp, authSignUp } from '../../../../shared/api';
 
-// class RegistrationModel {
-//     public error: null | string = null;
-//     public loading: boolean = false;
-//     public data: IUser | null = null;
-//     constructor() {
-//     }
+class RegistrationModel {
+    public error: IError | null = null;
+    public loading: boolean = false;
+    public data: IUser | null = null;
 
-//     async registerUser(data) {
-//         try {
+    constructor() {
+        makeAutoObservable(this);
+    }
 
-//             await authSignUp({
-//                 first_name: data.first_name,
-//                 last_name: data.last_name,
-//                 email: data.email,
-//                 pws: data.pws,
-//                 role: data.role as string,
-//             })
+    async createUser(data: IAuthSignUp) {
+        try {
+            this.loading = true;
+            const response = await authSignUp(data);
 
-//         } catch (err) {
-//             console.log('222', err);
-//         }
-//     }
-// }
+            runInAction(() => {
+                this.data = response;
+                this.loading = false;
+            });
+        } catch (err: any) {
+            this.loading = false;
+            const error = err.response.data;
 
-// export const new RegistrationModel();
+            runInAction(() => {
+                this.error = error;
+            });
+        }
+    }
+}
+
+export default new RegistrationModel();
