@@ -1,7 +1,8 @@
 import React, { InputHTMLAttributes, forwardRef } from 'react';
 
-import './BaseInput.scss';
 import { ErrorMessage } from '../error-message';
+
+import './BaseInput.scss';
 
 interface IBaseInput extends InputHTMLAttributes<HTMLInputElement> {
     error?: string;

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { observer } from 'mobx-react-lite';
 
-import sessionModel from '../../entities/session/model/sessionModel';
+import sessionModel from '@entities/session/model';
 
 import './Home.scss';
 

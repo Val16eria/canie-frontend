@@ -12,6 +12,14 @@ module.exports = {
     },
         resolve: {
         extensions: ['.tsx', '.ts', '.js'],
+        alias: {
+            '@pages': path.resolve(__dirname, '..', './src/pages'),
+            '@assets': path.resolve(__dirname, '..', './src/assets'),
+            '@shared': path.resolve(__dirname, '..', './src/shared'),
+            '@features': path.resolve(__dirname, '..', './src/features'),
+            '@entities': path.resolve(__dirname, '..', './src/entities'),
+            '@routing': path.resolve(__dirname, '..', './src/routing')
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({

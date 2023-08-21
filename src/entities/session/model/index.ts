@@ -1,1 +1,1 @@
-export * from './sessionModel';
+export { default } from './sessionModel';

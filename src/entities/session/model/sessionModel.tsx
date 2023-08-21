@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import { IUser, authLogout } from '../../../shared/api';
+import { IUser, authLogout } from '@shared/api';
 
 class SessionModel {
     public isAuthChecked: boolean = false;
@@ -33,15 +33,21 @@ class SessionModel {
     }
 
     private load() {
-        const user = Object.assign(
-            this,
-            JSON.parse(window.localStorage.getItem(SessionModel.name) || '{}'),
-        ).user;
-        if (user) {
-            runInAction(() => {
-                this.data = user;
-                this.isAuthChecked = true;
-            });
+        try {
+            const user = Object.assign(
+                this,
+                JSON.parse(
+                    window.localStorage.getItem(SessionModel.name) || '{}',
+                ),
+            ).user;
+            if (user) {
+                runInAction(() => {
+                    this.data = user;
+                    this.isAuthChecked = true;
+                });
+            }
+        } catch (err) {
+            console.log('Ошибка загрузки данных');
         }
     }
 
