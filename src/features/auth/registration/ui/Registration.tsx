@@ -9,7 +9,7 @@ import { schema, FormData } from '../lib';
 import sessionModel from '@entities/session/model';
 import registrationModel from '../model';
 import { Auth } from '../../auth';
-import { BaseButton, BaseInput, ErrorMessage } from '@shared/ui';
+import { BaseInput, ErrorMessage, RoleToggle } from '@shared/ui';
 
 import RegistrationPng from '@assets/registration-man.png';
 import './Registration.scss';
@@ -89,34 +89,7 @@ export const Registration: FC = observer(() => {
                     rules={{ required: true }}
                     render={({ field: { onChange, value } }) => (
                         <div className='flexable-row registration__choice_inputs'>
-                            <div className='registration__inputs_input'>
-                                <BaseButton
-                                    type='button'
-                                    btnText='Я - фотограф'
-                                    isPurple={value === 'photograph'}
-                                />
-                                <input
-                                    className='registration__input'
-                                    name='role'
-                                    type='radio'
-                                    value='photograph'
-                                    onChange={onChange}
-                                />
-                            </div>
-                            <div className='registration__inputs_input'>
-                                <BaseButton
-                                    type='button'
-                                    btnText='Я - модель'
-                                    isPurple={value === 'model'}
-                                />
-                                <input
-                                    className='registration__input'
-                                    name='role'
-                                    type='radio'
-                                    value='model'
-                                    onChange={onChange}
-                                />
-                            </div>
+                            <RoleToggle value={value} onChange={onChange} />
                         </div>
                     )}
                 />

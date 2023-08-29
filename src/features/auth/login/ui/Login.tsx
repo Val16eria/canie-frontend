@@ -65,7 +65,7 @@ export const Login: FC = observer(() => {
                 />
             </div>
             <div className='flexable-row login__options'>
-                <div className='flexable-row login__options_checkbox'>
+                <div className='flexable-row options_checkbox'>
                     <input type='checkbox' {...register('remember_me')} />
                     <p>{errors.remember_me?.message ?? ''}</p>
                     <label className='text-regular text-extra-small-size'>

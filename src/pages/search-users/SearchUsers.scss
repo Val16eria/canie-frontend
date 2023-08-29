@@ -1,0 +1,21 @@
+.search-users__container {
+    gap: 115px;
+
+}
+
+.search-user__content {
+    gap: 20px;
+}
+
+.search-user__content_roles {
+    gap: 12px;
+}
+
+.search-user__content_search {
+    justify-content: space-between;
+}
+
+.search-user__content_show {
+    display: flex;
+    justify-content: end;
+}
