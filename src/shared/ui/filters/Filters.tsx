@@ -1,21 +1,36 @@
 import React, { FC } from 'react';
 
 import { BaseCheckbox } from '../base-checkbox';
+import { MultipleRangeSlider } from '../multiple-range-slider';
 
 import './Filters.scss';
 
-export const Filters: FC = () => {
+interface IFilters {
+    role: string;
+}
+
+export const Filters: FC<IFilters> = ({ role }) => {
+    const handleChangeFilters = () => {
+        console.log('hey  hey');
+        if (role === 'photograph') {
+            console.log('get photographs');
+            // get all photographs
+        }
+        if (role === 'model') {
+            console.log('get models');
+            // get all models
+        }
+    };
+
     return (
         <div className='flexable-column opacity-background filters__container'>
             <p className='text-medium text-small-size'>Фильтры:</p>
-            <div className='flexable-column filters__container_price'>
-                <p className='text-medium text-small-size'>Цены за час</p>
-                <input type='range' min='100' max='35000' />
-                <div className='flexable-row filters__price_count'>
-                    <button>min</button>
-                    <button>max</button>
-                </div>
-            </div>
+            <p className='text-medium text-small-size'>Цены за час:</p>
+            <MultipleRangeSlider
+                min={100}
+                max={35000}
+                onChange={handleChangeFilters}
+            />
             <div className='flexable-column filters__container_checkboxes'>
                 <p>Виды фотосъемок:</p>
                 <BaseCheckbox value='wedding' label='Свадебная' />

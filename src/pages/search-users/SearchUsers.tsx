@@ -26,7 +26,7 @@ export const SearchUsers: FC = observer(() => {
                     />
                 </div>
                 <div className='flexable-row search-user__content_search'>
-                    <Filters />
+                    <Filters role={value} />
                     <div className='result'>
                         <p>результат поиска</p>
                     </div>
