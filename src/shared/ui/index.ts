@@ -4,5 +4,5 @@ export * from './base-input';
 export * from './error-message';
 export * from './loader';
 export * from './role-toggle';
-export * from './filters';
 export * from './multiple-range-slider';
+export * from './user-role-card';

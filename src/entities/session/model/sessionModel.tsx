@@ -1,4 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx';
+
+import sidebarModel from '@entities/sidebar/model';
+
 import { IUser, authLogout } from '@shared/api';
 
 class SessionModel {
@@ -54,6 +57,7 @@ class SessionModel {
     async logout(token: string) {
         try {
             await authLogout(token);
+            sidebarModel.resetData();
             window.localStorage.setItem(
                 SessionModel.name,
                 JSON.stringify({

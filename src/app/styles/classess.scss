@@ -1,3 +1,7 @@
+.background-style {
+    background-image: url('../../assets/background.svg');
+}
+
 .input-style {
     outline: none;
     border: none;
@@ -32,8 +36,7 @@
 
 .button-style {
     padding: 17px 29px;
-    max-width: 245px;
-    width: 100%;
+    width: auto;
     flex-shrink: 0;
 }
 
@@ -51,6 +54,13 @@
 .mini-avatar {
     max-width: 50px;
     max-height: 50px;
+    width: 100%;
+    height: 100%;
+}
+
+.middle-avatar {
+    max-width: 200px;
+    max-height: 200px;
     width: 100%;
     height: 100%;
 }

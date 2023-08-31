@@ -11,7 +11,7 @@ import './Header.scss';
 
 export const Header: FC = () => {
     return (
-        <div className='flexable-row header__container'>
+        <div className='flexable-row application__container header__container'>
             <img className='logo' src={Logo} alt='logo' />
             <nav className='flexable-row opacity-background header__navigation'>
                 <a className='text-regular text-extra-small-size'>Мои заказы</a>

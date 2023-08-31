@@ -11,3 +11,10 @@ export interface IUser {
         refresh_token: string;
     };
 }
+
+export interface IUserRoleParams {
+    price_per_hour: number[];
+    types_of_photos?: string[];
+    limit?: number;
+    offset?: number;
+}
