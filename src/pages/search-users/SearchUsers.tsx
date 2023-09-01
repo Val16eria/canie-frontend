@@ -20,6 +20,11 @@ export const SearchUsers: FC = observer(() => {
         sidebarModel.getUsersByRole(value);
     };
 
+    const handleChangeLimitUsers = () => {
+        sidebarModel.handleChangeLimit();
+        handleChangeFilters();
+    };
+
     useEffect(() => {
         handleChangeFilters();
     }, [value]);
@@ -41,14 +46,20 @@ export const SearchUsers: FC = observer(() => {
                 <div className='search-user__content_search'>
                     <Sidebar onChange={handleChangeFilters} />
                     <div className='search-user__search_result'>
-                        {!sidebarModel.data.length && <p>Ничего не найдено</p>}
+                        {!sidebarModel.data.length && (
+                            <p>Совпадений не найдено</p>
+                        )}
                         {sidebarModel.data.map((user, index) => (
                             <UserRoleCard key={index} user={user} />
                         ))}
                     </div>
                 </div>
                 <div className='search-user__content_show'>
-                    <BaseButton btnText='Смотреть еще' isPurple={true} />
+                    <BaseButton
+                        btnText='Смотреть еще'
+                        isPurple={true}
+                        onClick={handleChangeLimitUsers}
+                    />
                 </div>
             </div>
         </div>

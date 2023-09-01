@@ -9,6 +9,7 @@ interface IStarRaiting {
 }
 
 export const StarsRaiting: FC<IStarRaiting> = ({ count }) => {
+    const raiting: number = 5;
     return (
         <>
             {[...Array(count)].map((_item, index) => (
@@ -19,7 +20,7 @@ export const StarsRaiting: FC<IStarRaiting> = ({ count }) => {
                     alt='star raiting'
                 />
             ))}
-            {[...Array(5 - count)].map((_item, index) => (
+            {[...Array(raiting - count)].map((_item, index) => (
                 <img
                     key={index}
                     className='stars-raiting__container_img'

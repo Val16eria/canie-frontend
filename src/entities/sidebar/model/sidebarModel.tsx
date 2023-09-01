@@ -36,6 +36,12 @@ class SidebarModel {
         makeAutoObservable(this);
     }
 
+    handleChangeLimit = () => {
+        if (this._queryParams.limit) {
+            this._queryParams.limit += 10;
+        }
+    };
+
     handleChangePrice = (price: number[]) => {
         this._queryParams.price_per_hour = price;
     };
