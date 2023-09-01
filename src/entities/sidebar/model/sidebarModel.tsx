@@ -10,56 +10,82 @@ import {
 } from '@shared/api';
 
 class SidebarModel {
-    public loading: boolean = false;
-    public error: IError | null = null;
-    public queryParams: IUserRoleParams = {
+    private _loading: boolean = false;
+    private _error: IError | null = null;
+    private _queryParams: IUserRoleParams = {
         price_per_hour: [100, 35000],
         types_of_photos: [],
         limit: 10,
         offset: 0,
     };
-    public data: IPhotographer[] | IModel[] = [];
+    private _data: IPhotographer[] | IModel[] = [];
+
+    get loading(): boolean {
+        return this._loading;
+    }
+
+    get error(): IError | null {
+        return this._error;
+    }
+
+    get data(): IPhotographer[] | IModel[] {
+        return this._data;
+    }
 
     constructor() {
         makeAutoObservable(this);
     }
 
+    handleChangePrice = (price: number[]) => {
+        this._queryParams.price_per_hour = price;
+    };
+
+    handleChangeTypesOfPhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked) {
+            this._queryParams.types_of_photos?.push(e.target.value);
+        }
+        if (!e.target.checked) {
+            this._queryParams.types_of_photos =
+                this._queryParams.types_of_photos?.filter(
+                    (type) => type !== e.target.value,
+                );
+        }
+    };
+
     async getUsersByRole(role: string) {
         try {
-            this.loading = true;
+            this._loading = true;
             if (role === 'photograph') {
-                console.log('queryParams1', this.queryParams);
                 const response = await allPhotographersByParams(
-                    this.queryParams,
+                    this._queryParams,
                 );
 
                 runInAction(() => {
-                    this.data = response;
-                    this.loading = false;
+                    this._data = response;
+                    this._loading = false;
                 });
             }
             if (role === 'model') {
-                console.log('queryParams2', this.queryParams);
-                const response = await allModelsByParams(this.queryParams);
+                const response = await allModelsByParams(this._queryParams);
 
                 runInAction(() => {
-                    this.data = response;
-                    this.loading = false;
+                    this._data = response;
+                    this._loading = false;
                 });
             }
         } catch (err: any) {
-            this.loading = false;
+            this._loading = false;
             const error = err.response.data;
 
             runInAction(() => {
-                this.error = error;
+                this._error = error;
             });
         }
     }
 
     resetData() {
-        this.data = [];
-        this.queryParams = {
+        this._data = [];
+        this._queryParams = {
             price_per_hour: [],
             types_of_photos: [],
             limit: 10,

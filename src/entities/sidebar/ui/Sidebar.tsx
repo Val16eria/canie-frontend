@@ -13,16 +13,7 @@ interface ISidebar {
 
 export const Sidebar: FC<ISidebar> = observer(({ onChange }) => {
     const handleSetTypeOfPhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.log('isChecked', e.target.checked);
-        if (e.target.checked) {
-            sidebarModel.queryParams.types_of_photos?.push(e.target.value);
-        }
-        if (!e.target.checked) {
-            sidebarModel.queryParams.types_of_photos =
-                sidebarModel.queryParams.types_of_photos?.filter(
-                    (type) => type !== e.target.value,
-                );
-        }
+        sidebarModel.handleChangeTypesOfPhotos(e);
         onChange();
     };
 

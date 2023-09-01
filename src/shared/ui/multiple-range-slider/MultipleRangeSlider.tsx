@@ -53,7 +53,7 @@ export const MultipleRangeSlider: FC<IMultipleRangeSlider> = observer(
                     }%`;
                 }
             }
-            sidebarModel.queryParams.price_per_hour = [minValue, maxValue];
+            sidebarModel.handleChangePrice([minValue, maxValue]);
             onChange();
         }, [minValue, getPercent]);
 
@@ -68,18 +68,18 @@ export const MultipleRangeSlider: FC<IMultipleRangeSlider> = observer(
                     }%`;
                 }
             }
-            sidebarModel.queryParams.price_per_hour = [minValue, maxValue];
+            sidebarModel.handleChangePrice([minValue, maxValue]);
             onChange();
         }, [maxValue, getPercent]);
 
         return (
             <div className='slider__container'>
                 <input
-                    className={
+                    className={`thumb ${
                         minValue > max - 100
                             ? 'slider__container_thumb--zindex-5'
-                            : 'thumb slider__container_thumb--zindex-3'
-                    }
+                            : 'slider__container_thumb--zindex-3'
+                    }`}
                     type='range'
                     min={min}
                     max={max}

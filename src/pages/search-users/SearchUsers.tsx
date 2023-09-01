@@ -5,7 +5,7 @@ import sidebarModel from '@entities/sidebar/model';
 
 import { Header } from '@widgets/header';
 import { Sidebar } from '@entities/sidebar/ui';
-import { BaseButton, RoleToggle, UserRoleCard } from '@shared/ui';
+import { BaseButton, Loader, RoleToggle, UserRoleCard } from '@shared/ui';
 
 import './SearchUsers.scss';
 
@@ -21,7 +21,7 @@ export const SearchUsers: FC = observer(() => {
     };
 
     useEffect(() => {
-        sidebarModel.getUsersByRole(value);
+        handleChangeFilters();
     }, [value]);
 
     return (
@@ -36,10 +36,12 @@ export const SearchUsers: FC = observer(() => {
                             handleChangeFilters();
                         }}
                     />
+                    {sidebarModel.loading && <Loader />}
                 </div>
                 <div className='search-user__content_search'>
                     <Sidebar onChange={handleChangeFilters} />
                     <div className='search-user__search_result'>
+                        {!sidebarModel.data.length && <p>Ничего не найдено</p>}
                         {sidebarModel.data.map((user, index) => (
                             <UserRoleCard key={index} user={user} />
                         ))}
