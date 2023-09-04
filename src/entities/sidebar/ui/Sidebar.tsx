@@ -1,77 +1,76 @@
-import React, { FC } from 'react';
+import React, { ChangeEvent, FC } from 'react';
 import { observer } from 'mobx-react-lite';
 
 import sidebarModel from '../model/sidebarModel';
 
+import { TTypesOfPhotos } from '../lib';
+
+import { TRoleTypes, useSearchUsers } from '@features/search-users';
 import { MultipleRangeSlider, BaseCheckbox } from '@shared/ui';
 
 import './Sidebar.scss';
 
 interface ISidebar {
-    onChange: () => void;
+    getUsersByRole: (role: TRoleTypes) => void;
 }
 
-export const Sidebar: FC<ISidebar> = observer(({ onChange }) => {
-    const handleSetTypeOfPhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
-        sidebarModel.handleChangeTypesOfPhotos(e);
-        onChange();
+export const Sidebar: FC<ISidebar> = observer(({ getUsersByRole }) => {
+    const [role] = useSearchUsers();
+
+    const handleSetTypeOfPhotos = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value, checked } = e.target;
+        sidebarModel.handleChangeTypesOfPhotos(
+            value as TTypesOfPhotos,
+            checked,
+        );
+        getUsersByRole(role);
     };
 
     return (
         <div className='flexable-column opacity-background sidebar__container'>
             <p className='text-medium text-small-size'>Фильтры:</p>
             <p className='text-medium text-small-size'>Цены за час:</p>
-            <MultipleRangeSlider min={100} max={35000} onChange={onChange} />
+            <MultipleRangeSlider
+                minMultipleValue={100}
+                maxMultipleValue={35000}
+                getUsersByRole={getUsersByRole}
+            />
             <div className='flexable-column sidebar__container_checkboxes'>
                 <p>Виды фотосъемок:</p>
                 <BaseCheckbox
                     value='wedding'
                     label='Свадебная'
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleSetTypeOfPhotos(e)
-                    }
+                    onChange={handleSetTypeOfPhotos}
                 />
                 <BaseCheckbox
                     value='love_story'
                     label='Love Story'
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleSetTypeOfPhotos(e)
-                    }
+                    onChange={handleSetTypeOfPhotos}
                 />
                 <BaseCheckbox
                     value='family'
                     label='Семейная'
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleSetTypeOfPhotos(e)
-                    }
+                    onChange={handleSetTypeOfPhotos}
                 />
                 <BaseCheckbox
                     value='pets'
                     label='Питомцы'
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleSetTypeOfPhotos(e)
-                    }
+                    onChange={handleSetTypeOfPhotos}
                 />
                 <BaseCheckbox
                     value='reportage'
                     label='Репортажная'
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleSetTypeOfPhotos(e)
-                    }
+                    onChange={handleSetTypeOfPhotos}
                 />
                 <BaseCheckbox
                     value='model_tests'
                     label='Модельные тесты'
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleSetTypeOfPhotos(e)
-                    }
+                    onChange={handleSetTypeOfPhotos}
                 />
                 <BaseCheckbox
                     value='tfp'
                     label='TFP'
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleSetTypeOfPhotos(e)
-                    }
+                    onChange={handleSetTypeOfPhotos}
                 />
             </div>
         </div>

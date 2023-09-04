@@ -5,9 +5,21 @@ import sidebarModel from '@entities/sidebar/model';
 import { IUser, authLogout } from '@shared/api';
 
 class SessionModel {
-    public isAuthChecked: boolean = false;
-    public isAuth: boolean = false;
-    public data: IUser | null = null;
+    private _isAuthChecked: boolean = false;
+    private _isAuth: boolean = false;
+    private _data: IUser | null = null;
+
+    get isAuthChecked(): boolean {
+        return this._isAuthChecked;
+    }
+
+    get isAuth(): boolean {
+        return this._isAuth;
+    }
+
+    get data(): IUser | null {
+        return this._data;
+    }
 
     constructor() {
         makeAutoObservable(this);
@@ -23,7 +35,7 @@ class SessionModel {
                 }),
             );
             runInAction(() => {
-                this.isAuth = true;
+                this._isAuth = true;
                 this.load();
             });
         } catch (err) {
@@ -45,8 +57,8 @@ class SessionModel {
             ).user;
             if (user) {
                 runInAction(() => {
-                    this.data = user;
-                    this.isAuthChecked = true;
+                    this._data = user;
+                    this._isAuthChecked = true;
                 });
             }
         } catch (err) {
@@ -65,9 +77,9 @@ class SessionModel {
                 }),
             );
             runInAction(() => {
-                this.isAuthChecked = false;
-                this.data = null;
-                this.isAuth = false;
+                this._isAuthChecked = false;
+                this._data = null;
+                this._isAuth = false;
             });
         } catch (err) {
             console.log('Ошибка выхода');

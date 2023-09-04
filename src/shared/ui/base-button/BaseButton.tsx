@@ -1,17 +1,16 @@
-import React, { FC } from 'react';
+import React, { ButtonHTMLAttributes, FC } from 'react';
 
-interface IBaseButton {
+interface IBaseButton extends ButtonHTMLAttributes<HTMLButtonElement> {
     btnText: string;
     type?: 'button';
     isPurple?: boolean;
-    onClick?: () => void;
 }
 
 export const BaseButton: FC<IBaseButton> = ({
     btnText,
     type,
     isPurple,
-    onClick,
+    ...restProps
 }) => {
     const setStyle = isPurple ? 'button-purple-style' : 'button-white-style';
 
@@ -19,7 +18,7 @@ export const BaseButton: FC<IBaseButton> = ({
         <button
             className={`${setStyle} text-medium text-small-size button-style`}
             type={type}
-            onClick={onClick}
+            onClick={restProps.onClick}
         >
             {btnText}
         </button>

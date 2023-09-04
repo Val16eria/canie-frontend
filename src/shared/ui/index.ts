@@ -7,3 +7,4 @@ export * from './role-toggle';
 export * from './multiple-range-slider';
 export * from './user-role-card';
 export * from './stars-raiting';
+export * from './portal';

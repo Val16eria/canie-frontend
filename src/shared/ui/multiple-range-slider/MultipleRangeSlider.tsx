@@ -1,44 +1,55 @@
-import React, { FC, useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+    ChangeEvent,
+    FC,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import { observer } from 'mobx-react-lite';
 
+import { TRoleTypes, useSearchUsers } from '@features/search-users';
 import sidebarModel from '@entities/sidebar/model';
 
 import './MultipleRangeSlider.scss';
 
 interface IMultipleRangeSlider {
-    min: number;
-    max: number;
-    onChange: () => void;
+    minMultipleValue: number;
+    maxMultipleValue: number;
+    getUsersByRole: (role: TRoleTypes) => void;
 }
 
 export const MultipleRangeSlider: FC<IMultipleRangeSlider> = observer(
-    ({ min, max, onChange }) => {
-        const [minValue, setMinValue] = useState<number>(min);
-        const [maxValue, setMaxValue] = useState<number>(max);
+    ({ minMultipleValue, maxMultipleValue, getUsersByRole }) => {
+        const [role] = useSearchUsers();
 
-        const minValueRef = useRef<any>(null);
-        const maxValueRef = useRef<any>(null);
-        const rangeRef = useRef<any>(null);
+        const [minValue, setMinValue] = useState<number>(minMultipleValue);
+        const [maxValue, setMaxValue] = useState<number>(maxMultipleValue);
 
-        const handleChangeMinValue = (
-            e: React.ChangeEvent<HTMLInputElement>,
-        ) => {
+        const minValueRef = useRef<HTMLInputElement>(null);
+        const maxValueRef = useRef<HTMLInputElement>(null);
+        const rangeRef = useRef<HTMLDivElement>(null);
+
+        const handleChangeMinValue = (e: ChangeEvent<HTMLInputElement>) => {
             const value = Math.min(+e.target.value, maxValue - 1);
             setMinValue(value);
             e.target.value = value.toString();
         };
 
-        const handleChangeMaxValue = (
-            e: React.ChangeEvent<HTMLInputElement>,
-        ) => {
+        const handleChangeMaxValue = (e: ChangeEvent<HTMLInputElement>) => {
             const value = Math.max(+e.target.value, minValue + 1);
             setMaxValue(value);
             e.target.value = value.toString();
         };
 
         const getPercent = useCallback(
-            (value: any) => Math.round(((value - min) / (max - min)) * 100),
-            [min, max],
+            (value: any) =>
+                Math.round(
+                    ((value - minMultipleValue) /
+                        (maxMultipleValue - minMultipleValue)) *
+                        100,
+                ),
+            [minMultipleValue, maxMultipleValue],
         );
 
         useEffect(() => {
@@ -54,7 +65,7 @@ export const MultipleRangeSlider: FC<IMultipleRangeSlider> = observer(
                 }
             }
             sidebarModel.handleChangePrice([minValue, maxValue]);
-            onChange();
+            getUsersByRole(role);
         }, [minValue, getPercent]);
 
         useEffect(() => {
@@ -69,38 +80,34 @@ export const MultipleRangeSlider: FC<IMultipleRangeSlider> = observer(
                 }
             }
             sidebarModel.handleChangePrice([minValue, maxValue]);
-            onChange();
+            getUsersByRole(role);
         }, [maxValue, getPercent]);
 
         return (
             <div className='slider__container'>
                 <input
                     className={`thumb ${
-                        minValue > max - 100
+                        minValue > maxMultipleValue - 100
                             ? 'slider__container_thumb--zindex-5'
                             : 'slider__container_thumb--zindex-3'
                     }`}
                     type='range'
-                    min={min}
-                    max={max}
+                    min={minMultipleValue}
+                    max={maxMultipleValue}
                     step={100}
                     value={minValue}
                     ref={minValueRef}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleChangeMinValue(e)
-                    }
+                    onChange={handleChangeMinValue}
                 />
                 <input
                     className='thumb slider__container_thumb--zindex-4'
                     type='range'
-                    min={min}
-                    max={max}
+                    min={minMultipleValue}
+                    max={maxMultipleValue}
                     step={100}
                     value={maxValue}
                     ref={maxValueRef}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                        handleChangeMaxValue(e)
-                    }
+                    onChange={handleChangeMaxValue}
                 />
                 <div className='flexable-column slider__container_progress'>
                     <div>

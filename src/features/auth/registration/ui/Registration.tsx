@@ -13,6 +13,7 @@ import { BaseInput, ErrorMessage, RoleToggle } from '@shared/ui';
 
 import RegistrationPng from '@assets/registration-man.png';
 import './Registration.scss';
+import { TRoleTypes } from '@features/search-users';
 
 export const Registration: FC = observer(() => {
     const {
@@ -89,7 +90,10 @@ export const Registration: FC = observer(() => {
                     rules={{ required: true }}
                     render={({ field: { onChange, value } }) => (
                         <div className='flexable-row registration__choice_inputs'>
-                            <RoleToggle value={value} onChange={onChange} />
+                            <RoleToggle
+                                role={value as TRoleTypes}
+                                onChange={onChange}
+                            />
                         </div>
                     )}
                 />

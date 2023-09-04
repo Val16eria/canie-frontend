@@ -8,6 +8,8 @@ import {
     allModelsByParams,
     allPhotographersByParams,
 } from '@shared/api';
+import { TRoleTypes } from '@features/search-users';
+import { TTypesOfPhotos } from '../lib';
 
 class SidebarModel {
     private _loading: boolean = false;
@@ -46,19 +48,22 @@ class SidebarModel {
         this._queryParams.price_per_hour = price;
     };
 
-    handleChangeTypesOfPhotos = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (e.target.checked) {
-            this._queryParams.types_of_photos?.push(e.target.value);
+    handleChangeTypesOfPhotos = (
+        typeOfPhotos: TTypesOfPhotos,
+        isChecked: boolean,
+    ) => {
+        if (isChecked) {
+            this._queryParams.types_of_photos?.push(typeOfPhotos);
         }
-        if (!e.target.checked) {
+        if (!isChecked) {
             this._queryParams.types_of_photos =
                 this._queryParams.types_of_photos?.filter(
-                    (type) => type !== e.target.value,
+                    (type) => type !== typeOfPhotos,
                 );
         }
     };
 
-    async getUsersByRole(role: string) {
+    async getUsersByRole(role: TRoleTypes) {
         try {
             this._loading = true;
             if (role === 'photograph') {

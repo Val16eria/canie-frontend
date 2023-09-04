@@ -1,16 +1,18 @@
-import React, { FC } from 'react';
+import React, { FC, InputHTMLAttributes } from 'react';
 
 import './BaseCheckbox.scss';
 
-interface IBaseCheckbox {
-    value: string;
+interface IBaseCheckbox extends InputHTMLAttributes<HTMLInputElement> {
     label: string;
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const BaseCheckbox: FC<IBaseCheckbox> = ({ value, label, onChange }) => (
+export const BaseCheckbox: FC<IBaseCheckbox> = ({ label, ...restProps }) => (
     <div className='flexable-row options_checkbox'>
-        <input type='checkbox' value={value} onChange={onChange} />
+        <input
+            type='checkbox'
+            value={restProps.value}
+            onChange={restProps.onChange}
+        />
         <label className='text-regular text-extra-small-size'>{label}</label>
     </div>
 );
