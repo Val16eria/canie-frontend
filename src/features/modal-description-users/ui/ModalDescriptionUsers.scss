@@ -1,0 +1,33 @@
+.modal-description-users__container {
+    gap: 20px;
+    align-items: center;
+    width: inherit;
+}
+
+.modal-description-users__content {
+    gap: 35px;
+}
+
+.modal-description-users__content_details {
+    justify-content: space-between;
+    align-items: start;
+}
+
+.modal-description-users__details_user {
+    gap: 10px;
+}
+
+.modal-description-users__user_stars {
+    gap: 2px;
+    max-width: 10%;
+    width: 100%;
+}
+
+.modal-description-users__details_actions {
+    gap: 10px;
+    width: inherit;
+}
+
+.modal-description-users__content_description {
+    color: #AFAFAF;
+}

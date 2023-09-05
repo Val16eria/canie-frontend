@@ -38,8 +38,8 @@ export const SearchUsers: FC = observer(() => {
                 <Sidebar getUsersByRole={getUsersByRole} />
                 <div className='search-user__search_result'>
                     {!sidebarModel.data.length && <p>Совпадений не найдено</p>}
-                    {sidebarModel.data.map((user, index) => (
-                        <UserRoleCard key={index} user={user} />
+                    {sidebarModel.data.map((user) => (
+                        <UserRoleCard key={user.id} user={user} />
                     ))}
                 </div>
             </div>

@@ -44,7 +44,7 @@ class SessionModel {
     }
 
     public getUser() {
-        return this.data;
+        return this._data;
     }
 
     private load() {

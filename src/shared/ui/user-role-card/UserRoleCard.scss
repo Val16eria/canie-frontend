@@ -6,6 +6,7 @@
     height: auto;
     border-radius: 12px;
     flex-shrink: 0;
+    cursor: pointer;
 }
 
 .user-role-card__container_username {
@@ -37,8 +38,4 @@
     gap: 2px;
     max-width: 10%;
     width: 100%;
-}
-
-.user-role-card__rank_reviews {
-    color: #DDFB27;
 }
