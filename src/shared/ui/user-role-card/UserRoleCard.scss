@@ -1,0 +1,41 @@
+.user-role-card__container {
+    gap: 20px;
+    max-width: 400px;
+    padding: 15px;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    flex-shrink: 0;
+    cursor: pointer;
+}
+
+.user-role-card__container_username {
+    gap: 10px;
+}
+
+.user-role-card__container_avatar {
+    margin: 0 auto;
+}
+
+.user-role-card__container_description {
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    color: #AFAFAF;
+}
+
+.user-role-card__container_ranks {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-role-card__ranks_rank {
+    gap: 10px;
+}
+
+.user-role-card__rank_stars {
+    gap: 2px;
+    max-width: 10%;
+    width: 100%;
+}

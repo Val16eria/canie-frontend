@@ -1,0 +1,1 @@
+export { MultipleRangeSlider } from './MultipleRangeSlider';

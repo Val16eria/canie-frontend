@@ -29,7 +29,7 @@ export const Auth: FC<PropsWithChildren<IAuth>> = ({
     return (
         <div className='flexable-row auth__container'>
             <div className='flexable-column auth__content'>
-                <img className='auth__content_logo' src={Logo} alt='logo' />
+                <img className='logo' src={Logo} alt='logo' />
                 <form
                     className='flexable-column auth__content_form'
                     noValidate

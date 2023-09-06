@@ -1,0 +1,29 @@
+.search-user__container {
+    display: grid;
+    grid-template-rows: auto;
+    grid-row-gap: 20px;
+}
+
+.search-user__roles {
+    gap: 12px;
+}
+
+.search-user__search {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-column-gap: 11px;
+    backdrop-filter: blur(13.5px);
+}
+
+.search-user__search_result {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    grid-column-gap: 11px;
+    grid-row-gap: 20px;
+}
+
+.search-user__show {
+    display: flex;
+    justify-content: end;
+}

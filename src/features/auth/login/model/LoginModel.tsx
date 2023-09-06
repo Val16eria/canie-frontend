@@ -2,9 +2,21 @@ import { makeAutoObservable, runInAction } from 'mobx';
 import { IAuthSignIn, IError, IUser, authSignIn } from '@shared/api';
 
 class LoginModel {
-    public error: IError | null = null;
-    public loading: boolean = false;
-    public data: IUser | null = null;
+    private _error: IError | null = null;
+    private _loading: boolean = false;
+    private _data: IUser | null = null;
+
+    get error(): IError | null {
+        return this._error;
+    }
+
+    get loading(): boolean {
+        return this._loading;
+    }
+
+    get data(): IUser | null {
+        return this._data;
+    }
 
     constructor() {
         makeAutoObservable(this);
@@ -12,19 +24,19 @@ class LoginModel {
 
     async setUser(data: IAuthSignIn) {
         try {
-            this.loading = true;
+            this._loading = true;
             const response = await authSignIn(data);
 
             runInAction(() => {
-                this.data = response;
-                this.loading = false;
+                this._data = response;
+                this._loading = false;
             });
         } catch (err: any) {
-            this.loading = false;
+            this._loading = false;
             const error = err.response.data;
 
             runInAction(() => {
-                this.error = error;
+                this._error = error;
             });
         }
     }
