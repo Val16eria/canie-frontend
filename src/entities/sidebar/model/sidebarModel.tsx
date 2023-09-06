@@ -54,8 +54,7 @@ class SidebarModel {
     ) => {
         if (isChecked) {
             this._queryParams.types_of_photos?.push(typeOfPhotos);
-        }
-        if (!isChecked) {
+        } else {
             this._queryParams.types_of_photos =
                 this._queryParams.types_of_photos?.filter(
                     (type) => type !== typeOfPhotos,

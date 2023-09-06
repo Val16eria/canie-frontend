@@ -10,6 +10,7 @@ interface IStarRaiting {
 
 export const StarsRaiting: FC<IStarRaiting> = ({ count }) => {
     const maxRaiting: number = 5;
+    console.log('raiting', count);
     return (
         <>
             {[...Array(count)].map((_item, index) => (

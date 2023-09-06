@@ -37,10 +37,15 @@ export const SearchUsers: FC = observer(() => {
             <div className='search-user__search'>
                 <Sidebar getUsersByRole={getUsersByRole} />
                 <div className='search-user__search_result'>
-                    {!sidebarModel.data.length && <p>Совпадений не найдено</p>}
-                    {sidebarModel.data.map((user) => (
-                        <UserRoleCard key={user.id} user={user} />
-                    ))}
+                    {sidebarModel.data.length ? (
+                        <>
+                            {sidebarModel.data.map((user) => (
+                                <UserRoleCard key={user.id} user={user} />
+                            ))}
+                        </>
+                    ) : (
+                        <p>Совпадений не найдено</p>
+                    )}
                 </div>
             </div>
             <div className='search-user__show'>

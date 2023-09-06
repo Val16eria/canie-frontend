@@ -1,11 +1,13 @@
 .modal-description-users__container {
+    margin: auto;
     gap: 20px;
     align-items: center;
-    width: inherit;
+    width: 100%;
 }
 
 .modal-description-users__content {
     gap: 35px;
+    width: inherit;
 }
 
 .modal-description-users__content_details {
